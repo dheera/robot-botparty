@@ -24,7 +24,7 @@ difference() {
         cube_center([16,batt_w + 4 + 4 + 2*t,top_space]);
 
         translate([16/2+8/2,0,0])
-        cube_center([12,batt_w+2*t,top_space]);
+        cube_center([8,batt_w+2*t,top_space]);
 
         translate([0,-batt_w/2-t-4,1])
         rotate([0,0,90])
@@ -47,14 +47,14 @@ cube_center([1.1,150,1.1]);
 translate([6.5,0,0])
 cube_center([1.1,150,1.1]);
 
-translate([13,-batt_w/2+4,0]) {
+translate([11.5,-batt_w/2+4,0]) {
 translate([0,0,1])
 cylinder(d1=3.1,d2=6.1,h=3.001,$fn=32);
 translate([0,0,0])
 cylinder(d1=3.1,d2=3.1,h=3,$fn=32);
 }
 
-translate([13,batt_w/2-4,0]) {
+translate([11.5,batt_w/2-4,0]) {
 translate([0,0,1])
 cylinder(d1=3.1,d2=6.1,h=3.001,$fn=32);
 translate([0,0,0])
@@ -68,22 +68,22 @@ translate([0,0,0])
 cylinder(d1=3.1,d2=3.1,h=3,$fn=32);
 }
 
-translate([13,-batt_w/2+15,0])
+translate([11.5,-batt_w/2+15,0])
 cylinder(d=m3_insert_d,h=5,$fn=32);
-translate([13,0,0])
+translate([11.5,0,0])
 cylinder(d=m3_insert_d,h=5,$fn=32);
-translate([13,batt_w/2-15,0])
+translate([11.5,batt_w/2-15,0])
 cylinder(d=m3_insert_d,h=5,$fn=32);
 
-translate([0,-21,0])
-cube_center([12,12,0.75]);
-translate([0,-24.5+3.5,0])
-cube_center([5,12,4]);
+translate([0,-19,0])
+cube_center([12,16,0.75]);
+translate([0,-24.5+3.5+2,0])
+cube_center([5,16,4]);
 
-translate([0,21,0])
-cube_center([12,12,0.75]);
-translate([0,24.5-3.5,0])
-cube_center([5,12,4]);
+translate([0,19,0])
+cube_center([12,16,0.75]);
+translate([0,24.5-3.5-2,0])
+cube_center([5,16,4]);
 
 }
 
