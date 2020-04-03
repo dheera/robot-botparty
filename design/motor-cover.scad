@@ -40,13 +40,13 @@ difference() {
 
 translate([-7,0,0,])
 cube_center([2,batt_w+2*t+0.2,10]);
-/*
+
 translate([-6.5,0,0])
-cube_center([1.1,100,1.1]);
+cube_center([1.1,150,1.1]);
 
 translate([6.5,0,0])
-cube_center([1.1,100,1.1]);
-*/
+cube_center([1.1,150,1.1]);
+
 translate([13,-batt_w/2+4,0]) {
 translate([0,0,1])
 cylinder(d1=3.1,d2=6.1,h=3.001,$fn=32);

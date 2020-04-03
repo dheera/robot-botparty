@@ -126,8 +126,8 @@ module motor_mount_cutout() {
         difference() {
             union() {
                 cube_center([12,38.001,9.5+5]);
-                translate([0,-38/2+24+5/2,0])
-                cube_center([14,5,9.5+5]);
+                //translate([0,-38/2+24+5/2,0])
+                //cube_center([14,5,9.5+5]);
                 
                 translate([0,24.5-3.5-2,0])
                 cube_center([12,12,15]);
@@ -177,16 +177,16 @@ linear_extrude(height = 16, center = true, convexity = 10, twist = 0)
 polygon(points=[[0,0],[5,7],[5,0]]);
 }
 
-/*
+
 for(q=[0:1:1])
 translate([w_off +17.5+ q*13,0,batt_h + t - top_space])
 difference() {
     cube_center([1,batt_w+2*7+2*t,1]);
-    for(sign=[-1:2:1])
-    translate([0,sign*(batt_w/2-17.5),0])
-    cube_center([5,5,5]);
+    //for(sign=[-1:2:1])
+    //translate([0,sign*(batt_w/2-17.5),0])
+    //cube_center([5,5,5]);
 }
-*/
+
 
 translate([-batt_l/2-t/2,0,batt_h+t]) {
     difference() {
