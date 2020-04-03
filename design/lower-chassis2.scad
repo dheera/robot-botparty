@@ -1,9 +1,9 @@
-batt_l = 68;
-batt_w = 108;
+batt_l = 108;
+batt_w = 66;
 batt_h = 19;
 
 
-w_off = batt_l/2 - 16;
+w_off = batt_l/2 - 14;
 
 pi_l = 65;
 pi_w = 56;
@@ -21,10 +21,11 @@ t = 2;
     h=12;
 
 
+/*
 translate([0,0,35])
 rotate([0,0,90])
 cube_center([105,65,17]);
-
+*/
 
 
     translate([batt_l/2+7+1.5*t,0,0])
@@ -37,7 +38,7 @@ difference() {
     
         translate([-wheel_dist_l/2+w_off,0,(h+t)/2+batt_h+t-h-top_space])
         rotate([90,0,0])
-        cylinder(d=m3_insert_d, h=100, center=true, $fn=32);
+        cylinder(d=m3_insert_d, h=500, center=true, $fn=32);
 }
 
 wheelbars();
@@ -80,16 +81,16 @@ module wheelbars() {
                     
         }
     
-        translate([14.5,batt_w/2 + 7, 0])
+        translate([w_off,batt_w/2 + 7, 0])
         cube_center([32, 10, h]);
         
-        translate([14.5,-(batt_w/2 + 7), 0])
+        translate([w_off,-(batt_w/2 + 7), 0])
         cube_center([32, 10, h]);
         
-        translate([-32.5,batt_w/2 + 7, 0])
+        translate([w_off-14.5-32.5,batt_w/2 + 7, 0])
         cube_center([30, 10, h]);
         
-        translate([-32.5,-(batt_w/2 + 7), 0])
+        translate([w_off-14.5-32.5,-(batt_w/2 + 7), 0])
         cube_center([30, 10, h]);
         
         
@@ -101,10 +102,10 @@ module wheelbars() {
         
         translate([-wheel_dist_l/2+w_off,0,(h+t)/2])
         rotate([90,0,0])
-        cylinder(d=m3_insert_d, h=100, center=true, $fn=32);
+        cylinder(d=m3_insert_d, h=200, center=true, $fn=32);
         
         
-    translate([wheel_dist_l/2+w_off-3,-0,h-6])
+    translate([wheel_dist_l/2+w_off-3,0,h-6])
         cylinder(d=m3_insert_d,h=100,$fn=32);
         
         // motor mount cutouts
