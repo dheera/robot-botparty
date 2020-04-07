@@ -1,8 +1,8 @@
-batt_l = 66;
-batt_w = 108;
-batt_h = 19;
+batt_l = 68;
+batt_w = 110;
+batt_h = 18;
 
-w_stretch = 5;
+w_stretch = 2;
 w_off = batt_l/2 - 16;
 
 pi_l = 65;
@@ -75,14 +75,14 @@ cylinder(d=m3_insert_d,h=5,$fn=32);
 translate([11.5,batt_w/2-15,0])
 cylinder(d=m3_insert_d,h=5,$fn=32);
 
-translate([0,-19,0])
+translate([0,-24.5+3.5+2-4,0])
 cube_center([12,16,0.75]);
-translate([0,-24.5+3.5+2,0])
+translate([0,-24.5+3.5+2-4,0])
 cube_center([5,16,4]);
 
-translate([0,19,0])
+translate([0,24.5-3.5-2+4,0])
 cube_center([12,16,0.75]);
-translate([0,24.5-3.5-2,0])
+translate([0,24.5-3.5-2+4,0])
 cube_center([5,16,4]);
 
 }

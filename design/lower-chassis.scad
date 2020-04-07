@@ -1,9 +1,27 @@
-batt_l = 66;
-batt_w = 108;
-batt_h = 19;
+batt_l = 68;
+batt_w = 110;
+batt_h = 18;
 
-w_stretch = 6;
+w_stretch = 2;
 w_off = batt_l/2 - 16;
+
+/*
+translate([-8,batt_w/2+10,11])
+rotate([90,0,0])
+cylinder(d=3,$fn=32);
+translate([-8+48+2,batt_w/2+10,11])
+rotate([90,0,0])
+cylinder(d=3,$fn=32);
+*/
+
+/*
+translate([-8.5,batt_w/2+15,10])
+rotate([90,0,0])
+cylinder(d=35);
+translate([-8.5+48+2,batt_w/2+15,10])
+rotate([90,0,0])
+cylinder(d=35);
+*/
 
 pi_l = 65;
 pi_w = 56;
@@ -39,12 +57,19 @@ difference() {
     translate([0,0,t])
     cube_center([batt_l,batt_w,batt_h * 2]);
     
+    translate([14,100,2+9-8/2])
+    cube_center([14,100,8]);
+    
         translate([-wheel_dist_l/2+w_off-w_stretch,0,(h+t)/2+batt_h+t-h-top_space])
         rotate([90,0,0])
         cylinder(d=m3_insert_d, h=500, center=true, $fn=32);
 }
 
+difference() {
 wheelbars();
+    scale([1,1,-1])
+cube_center([200,200,100]);
+}
 
 module cube_center(dims) {
     translate([-dims[0]/2, -dims[1]/2, 0])
