@@ -183,7 +183,7 @@ $(function() {
 
 $(()=>{
   setInterval(() => {
-    if(socket && socket.connected && peerConnection && peerConnection.connectionState==="connected") {
+    if(socket && socket.connected && peerConnection && (peerConnection.connectionState==="connected" || peerConnection.iceConnectionState==="connected")) {
       sendMessage({"stick": [currentX, currentY, Date.now()]});
     }
   }, 100);
