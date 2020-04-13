@@ -28,6 +28,7 @@ $(() => {
 
   $("#inputPassCode").on('keyup', function (e) {
     if (e.keyCode === 13) {
+      $('#spinnerContainer').show();
       verifyAuth(
         $("#inputPassCode").val(),
         () => {
@@ -35,12 +36,14 @@ $(() => {
         }, ()=> {
           console.log("authentication failure");
           $("#errorMessage").text("Bad passcode").slideDown().delay(2000).slideUp();
+          $('#spinnerContainer').hide();
         }
       );
     }
   });
 
   $("#buttonJoin").click(()=>{
+    $('#spinnerContainer').show();
     verifyAuth(
       $("#inputPassCode").val(),
       () => {
@@ -48,6 +51,7 @@ $(() => {
       }, ()=> {
         console.log("authentication failure");
         $("#errorMessage").text("Bad passcode").slideDown().delay(2000).slideUp();
+        $('#spinnerContainer').hide();
       }
     );
   });

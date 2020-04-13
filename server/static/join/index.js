@@ -88,6 +88,7 @@ function startWebRTC(isOfferer) {
     const stream = event.streams[0];
     if (!remoteVideo.srcObject || remoteVideo.srcObject.id !== stream.id) {
       remoteVideo.srcObject = stream;
+      remoteVideo.onplaying = () => $('#spinnerContainer').hide();
     }
   };
 

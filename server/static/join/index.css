@@ -1,6 +1,13 @@
 
   body {
-    background:#0080cc;
+    background:#303030;
+    background-image: url(bg.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
     margin:0;
     height: 100vh;
     margin: 0;
@@ -11,6 +18,11 @@
     -moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;
   }
 
+  #spinnerContainer {
+	  display:none;
+	  z-index:15000;
+	  position:fixed;top:50%;left:50%;
+  }
 
   #panelJoin {
       position:fixed;
@@ -56,13 +68,6 @@
   }
 
 #localVideoContainer {
-      /*
-      background:#404040;
-      width:360pt;
-      height:240pt;
-      text-align:center;
-      margin-bottom:30pt;
-      */
       z-index:10001;
       background:#404040;
       width:100%;
@@ -72,13 +77,6 @@
       position:fixed;
 }
 #loginContainer {
-      /*
-      background:#404040;
-      width:360pt;
-      height:240pt;
-      text-align:center;
-      margin-bottom:30pt;
-      */
       background:rgba(20,20,20,0.8);
       z-index:10002;
       width:100%;
@@ -185,3 +183,24 @@
     -webkit-backface-visibility: hidden;
     -webkit-transform: translate3d(0, 0, 0);
   }
+
+
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
+ 
+.spinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50pt;
+  height: 50pt;
+  margin-top: -25pt;
+  margin-left: -25pt;
+  border-radius: 50%;
+  border-top: 4px solid #ffffff;
+  border-right: 4px solid transparent;
+  animation: spinner .6s linear infinite;
+}
