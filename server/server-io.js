@@ -1,8 +1,17 @@
+const { RateLimiterMemory } = require('rate-limiter-flexible');
 const log = require('pino')({prettyPrint: true, level: 'debug'});
 
 module.exports = (app, io) => {
 
 rooms = {};
+
+const rateLimiter = new RateLimiterMemory(
+  {
+    points: 50,
+    duration: 1,
+  });
+
+const keywords = ["connection", "connect", "disconnect", "reconnect", "subscribe", "unsubscribe", "publish"];
 
 io.on('connection', function(socket) {
   if(socket && socket.handshake && socket.handshake.headers) {
@@ -18,57 +27,80 @@ io.on('connection', function(socket) {
     'socket.ip': socket.ip,
   }});
 
-  socket.on('subscribe', (roomName) => {
+  socket.on('subscribe', async (roomName) => {
     log.info({'subscribe': {
       'socket.id': socket.id,
       'socket.ip': socket.ip,
       'roomName': roomName,
     }});
-    if(!(roomName in rooms)) {
-      rooms[roomName] = [];
-    }
-    rooms[roomName].push({socket: socket});
+    try {
+        await rateLimiter.consume(socket.handshake.address);
+	if(keywords.includes(roomName)) {
+	    log.error({'subscribe.badRoomNameError': {'socket.id': socket.id, 'socket.ip': socket.ip}});
+            return;
+	}
+	if(roomName.indexOf(".")!==-1) {
+	    log.error({'subscribe.badRoomNameError': {'socket.id': socket.id, 'socket.ip': socket.ip}});
+            return;
+	}
+        if(!(roomName in rooms)) {
+            rooms[roomName] = [];
+        }
+        rooms[roomName].push({socket: socket});
 
-    log.info({[roomName + '.members']: rooms[roomName].map(s=>s.socket.id)});
-    socket.emit(roomName + '.members', rooms[roomName].map(s=>s.socket.id));
+        log.info({[roomName + '.members']: rooms[roomName].map(s=>s.socket.id)});
+        socket.emit(roomName + '.members', rooms[roomName].map(s=>s.socket.id));
+    } catch(rejRes) {
+	log.error({'subscribe.blockedError': {'socket.id': socket.id, 'socket.ip': socket.ip}});
+    }
   });
 
-  socket.on('unsubscribe', (roomName) => {
+  socket.on('unsubscribe', async (roomName) => {
     log.info({'unsubscribe': {
       'socket.id': socket.id,
       'socket.ip': socket.ip,
       'roomName': roomName,
     }});
 
-    if(!(roomName in rooms)) {
-      rooms[roomName] = [];
-    }
+    try {
+        await rateLimiter.consume(socket.handshake.address);
+        if(!(roomName in rooms)) {
+              rooms[roomName] = [];
+        }
 
-    for(i in rooms[roomName]) {
-      if(!rooms[roomName][i]) continue;
-      if(rooms[roomName][i].socket === socket) {
-        delete(rooms[roomName][i]);
-      }
+        for(i in rooms[roomName]) {
+          if(!rooms[roomName][i]) continue;
+          if(rooms[roomName][i].socket === socket) {
+            delete(rooms[roomName][i]);
+          }
+        }
+        rooms[roomName] = rooms[roomName].filter(el => el != null);
+    } catch(rejRes) {
+	log.error({'subscribe.blockedError': {'socket.id': socket.id, 'socket.ip': socket.ip}});
     }
-    rooms[roomName] = rooms[roomName].filter(el => el != null);
   });
 
-  socket.on('publish', (data) => {
+  socket.on('publish', async (data) => {
     log.info({'publish': {
       'socket.id': socket.id,
       'socket.ip': socket.ip,
       'data': data,
     }});
-    if(!data.message) return;
-    if(!data.roomName) return;
-    if(!(data.roomName in rooms)) return;
-    for(i in rooms[data.roomName]) {
-      if(!rooms[data.roomName][i]) continue;
-      if(!rooms[data.roomName][i].socket) continue;
-      rooms[data.roomName][i].socket.emit(data.roomName + '.message', {
-        sender: socket.id,
-        message: data.message,
-      });
+    try {
+        await rateLimiter.consume(socket.handshake.address);
+        if(!data.message) return;
+        if(!data.roomName) return;
+        if(!(data.roomName in rooms)) return;
+        for(i in rooms[data.roomName]) {
+          if(!rooms[data.roomName][i]) continue;
+          if(!rooms[data.roomName][i].socket) continue;
+          rooms[data.roomName][i].socket.emit(data.roomName + '.message', {
+            sender: socket.id,
+            message: data.message,
+          });		
+        }
+    } catch(rejRes) {
+	log.error({'subscribe.blockedError': {'socket.id': socket.id, 'socket.ip': socket.ip}});
     }
   });
 
