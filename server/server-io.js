@@ -144,6 +144,7 @@ io.on('connection', function(socket) {
         }
       }
       rooms[roomName] = rooms[roomName].filter(el => el != null);
+      if(rooms[roomName].length === 0) delete(rooms[roomName]);
     }
   });
 });
