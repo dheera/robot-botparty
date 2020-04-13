@@ -1,0 +1,10 @@
+#!/bin/bash
+
+cd `dirname $0`
+
+while true
+do
+  node `dirname $0`/server.js
+  sleep 2
+done
+

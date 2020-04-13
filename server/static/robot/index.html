@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="https://cdn.scaledrone.com/scaledrone.min.js"></script>
+  <script type="text/javascript" src="socket.io.slim.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body>
+  <div id="panelConfiguration">
+    Robot id: <input id="panelConfiguration-inputRobotId" type="text" value="0">
+    <br>
+    Pass code: <input id="panelConfiguration-inputPassCode" type="text" value=""">
+    <br>
+    <button id="panelConfiguration-buttonSave">save</button>
+  </div>
+  <div id="panelLocalVideo">
+    <video id="localVideo" autoplay muted></video>
+  </div>
+  <div id="panelRemoteVideo">
+    <video id="remoteVideo" autoplay></video>
+  </div>
+  <div id="botNumDisplay">-1</div>
+  <script src="index.js"></script>
+</body>
+</html>

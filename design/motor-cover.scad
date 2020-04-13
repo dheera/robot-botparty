@@ -42,10 +42,10 @@ translate([-7,0,0,])
 cube_center([2,batt_w+2*t+0.2,10]);
 
 translate([-6.5,0,0])
-cube_center([1.1,150,1.1]);
+cube_center([1.2,150,1.2]);
 
 translate([6.5,0,0])
-cube_center([1.1,150,1.1]);
+cube_center([1.2,150,1.2]);
 
 translate([11.5,-batt_w/2+4,0]) {
 translate([0,0,1])

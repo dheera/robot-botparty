@@ -54,8 +54,19 @@ cube_center([8.5,143.8,69.5]);
 
 difference() {
     cube_center([batt_l+2*t,batt_w+2*t,batt_h + t]);
+    
     translate([0,0,t])
     cube_center([batt_l,batt_w,batt_h * 2]);
+    
+    translate([0,0,t-0.5])
+    cube_center([batt_l-10,batt_w-10,batt_h]);
+    
+    for(j=[-21:7:21]) {
+    for(i=[-42:7:42]) {
+        translate([j,i,0])
+        cube_center([4,4,batt_h]);
+    }
+    }
     
     translate([14,100,2+9-8/2])
     cube_center([14,100,8]);

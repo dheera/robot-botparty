@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="https://cdn.scaledrone.com/scaledrone.min.js"></script>
+  <script type="text/javascript" src="socket.io.slim.js"></script>
+  <script type="text/javascript" src="algorithms.js"></script>
+  <script type="text/javascript" src="control.js"></script>
+  <script type="text/javascript" src="ui.js"></script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body>
+  <div id="panelJoin">
+    <div id="localVideoContainer">
+      <video id="localVideo" autoplay muted></video>
+    </div>
+    <div id="loginContainer">
+      <div id="displayRoomName"></div>
+      <input id="inputPassCode" type="text" value="" placeholder="pass code">
+      <button id="buttonJoin">Join &raquo;</button>
+      <div id="errorMessage"></div>
+    </div>
+  </div>
+  <div id="panelRemoteVideo">
+    <video id="remoteVideo" autoplay></video>
+  </div>
+
+  <div class="control-container">
+    <div class="control-area">
+      <div class="control-touch"></div>
+      <div class="control-stick"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="index.js"></script>
+
+</body>
+</html>
