@@ -7,11 +7,23 @@ rooms = {};
 
 const rateLimiter = new RateLimiterMemory(
   {
-    points: 50,
+    points: 150,
     duration: 1,
   });
 
 const keywords = ["connection", "connect", "disconnect", "reconnect", "subscribe", "unsubscribe", "publish"];
+
+setInterval(() => {
+    for(roomName in rooms) {
+      console.log(roomName);
+      for(i in rooms[roomName]) {
+        if(!rooms[roomName][i]) { console.log("-"); continue; }
+        if(!rooms[roomName][i].socket) { console.log("--"); continue; }
+        console.log(rooms[roomName][i].socket.id);
+      }
+      console.log("");
+    }
+}, 5000);
 
 io.on('connection', function(socket) {
 

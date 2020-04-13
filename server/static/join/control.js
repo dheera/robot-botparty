@@ -182,9 +182,20 @@ $(function() {
 });
 
 $(()=>{
+  let zeros = 0;
   setInterval(() => {
     if(socket && socket.connected && peerConnection && (peerConnection.connectionState==="connected" || peerConnection.iceConnectionState==="connected")) {
-      sendMessage({"stick": [currentX, currentY, Date.now()]});
+      if(Math.abs(currentX) < 1e-3 && Math.abs(currentY) < 1e-3) {
+        currentX = 0;
+        currentY = 0;
+        zeros++;
+        if(zeros < 5) {
+          sendMessage({"stick": [currentX, currentY, Date.now()]});
+        }
+      } else {
+        zeros = 0;
+        sendMessage({"stick": [currentX, currentY, Date.now()]});
+      }
     }
   }, 100);
 });

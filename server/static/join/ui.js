@@ -1,6 +1,9 @@
 let stream;
 
 $(() => {
+  $("input").hide();
+  $("button").hide();
+  $("#errorMessage").text("Please enable camera/microphone permissions.").show();
   navigator.mediaDevices.getUserMedia({
     audio: true,
     video: true,
@@ -8,6 +11,9 @@ $(() => {
     stream = stream_;
     // Display your local video in #localVideo element
     localVideo.srcObject = stream;
+    $("input").show();
+    $("button").show();
+    $("#errorMessage").text("").hide();
   }).catch(err => {
     if(err.name === "NotAllowedError") {
       $("#errorMessage").text("Please enable your camera and microphone and reload the page.").slideDown();
