@@ -14,6 +14,14 @@ const rateLimiter = new RateLimiterMemory(
 const keywords = ["connection", "connect", "disconnect", "reconnect", "subscribe", "unsubscribe", "publish"];
 
 io.on('connection', function(socket) {
+
+  // close if client doesn't subscribe to anything in 3 seconds
+  socket.connectionTimeout = setTimeout(() => {
+    socket.disconnect(true);
+  }, 3000);
+
+  socket.subscriptions = [];
+
   if(socket && socket.handshake && socket.handshake.headers) {
       if("x-real-ip" in socket.handshake.headers) {
         socket.ip = socket.handshake.headers["x-real-ip"];
@@ -35,6 +43,7 @@ io.on('connection', function(socket) {
     }});
     try {
         await rateLimiter.consume(socket.handshake.address);
+        if(socket.connectionTimeout) clearTimeout(socket.connectionTimeout);
 	if(keywords.includes(roomName)) {
 	    log.error({'subscribe.badRoomNameError': {'socket.id': socket.id, 'socket.ip': socket.ip}});
             return;
@@ -43,15 +52,21 @@ io.on('connection', function(socket) {
 	    log.error({'subscribe.badRoomNameError': {'socket.id': socket.id, 'socket.ip': socket.ip}});
             return;
 	}
+        if(socket.subscriptions.length > 10) {
+	   log.error({'subscribe.tooManySubscriptionsError': {'socket.id': socket.id, 'socket.ip': socket.ip}});
+           socket.disconnect(true);
+           return;
+	}
         if(!(roomName in rooms)) {
             rooms[roomName] = [];
         }
         rooms[roomName].push({socket: socket});
+        socket.subscriptions.push(roomName);
 
         log.info({[roomName + '.members']: rooms[roomName].map(s=>s.socket.id)});
         socket.emit(roomName + '.members', rooms[roomName].map(s=>s.socket.id));
     } catch(rejRes) {
-	log.error({'subscribe.blockedError': {'socket.id': socket.id, 'socket.ip': socket.ip}});
+        log.error({'subscribe.error': rejRes});
     }
   });
 
@@ -76,7 +91,7 @@ io.on('connection', function(socket) {
         }
         rooms[roomName] = rooms[roomName].filter(el => el != null);
     } catch(rejRes) {
-	log.error({'subscribe.blockedError': {'socket.id': socket.id, 'socket.ip': socket.ip}});
+        log.error({'subscribe.error': rejRes});
     }
   });
 
@@ -100,7 +115,7 @@ io.on('connection', function(socket) {
           });		
         }
     } catch(rejRes) {
-	log.error({'subscribe.blockedError': {'socket.id': socket.id, 'socket.ip': socket.ip}});
+        log.error({'subscribe.error': rejRes});
     }
   });
 

@@ -12,6 +12,7 @@
     "express": "^4.17.1",
     "pino": "^6.2.0",
     "pino-pretty": "^4.0.0",
+    "rate-limiter-flexible": "^2.1.3",
     "socket.io": "^2.3.0"
   }
 }
