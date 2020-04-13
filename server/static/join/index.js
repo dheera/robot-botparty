@@ -19,26 +19,24 @@ let room;
 let peerConnection;
 let dataChannel;
 
-let socket = io("https://botparty.dheera.net/");
-
+let socket;
 let droneRoomName = "";
 let isOfferer;
 
 function verifyAuth(passCode, onSuccess, onFailure) {
   droneRoomName = hash(roomName + "-" + passCode);
 
-  // We're connected to the room and received an array of 'members'
-  // connected to the room (including us). Signaling server is ready.
+  socket = io("https://botparty.dheera.net/");
+
   socket.on(droneRoomName + '.members', members => {
     console.log('MEMBERS', members);
-    // If we are the second user to connect to the room we will be creating the offer
     isOfferer = members.length === 2;
 
     if(isOfferer) {
       onSuccess();
       startWebRTC(isOfferer);
     } else {
-      //socket.unsubscribe();
+      socket.emit("unsubscribe", droneRoomName);
       onFailure();
     }
   });
@@ -55,6 +53,9 @@ function onError(error, data) {
 
 // Send signaling data via Scaledrone
 function sendMessage(message) {
+  if(!socket) { console.error("sendMessage: no socket");return; }
+  if(!socket.connected) { console.error("sendMessage: socket disconnected");return; }
+
   socket.emit('publish', {
     roomName: droneRoomName,
     message: message,
