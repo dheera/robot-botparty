@@ -17,19 +17,8 @@ See .stl files in design/. I recommend printing in PETG. PLA sucks.
 * [DRV8833 dual motor driver carrier](https://www.pololu.com/product/2130)
 * [TinyPICO](https://www.adafruit.com/product/4335)
 
-#### 
-
-* 1 x [Savox SH-0262MG](https://www.amazon.com/gp/product/B004IZSI9S/) for the head
-* 4 x [Savox SC-1251MG](https://www.amazon.com/gp/product/B004K3FAJE/) for the rest of the joints
-
-#### Other electronics
-
-* 1 x Raspberry Pi 3 B+
-* 1 x [IMX290 USB camera](https://www.amazon.com/gp/product/B07L6TPB35/)
-* 1 x [12x5050 Neopixel ring](https://www.adafruit.com/product/1643)
-* 1 x [BNO055 breakout](https://www.amazon.com/Adafruit-Absolute-Orientation-Fusion-Breakout/dp/B017PEIGIG)
-* 1 x [PCA9685 breakout](https://www.amazon.com/gp/product/B01G61MZF4/)
-* 1 x [12V to 6V 3A DC-DC](https://www.amazon.com/gp/product/B00CGQRIFG/) for servos
-* 1 x [12V to 5V 3A DC-DC](https://www.amazon.com/gp/product/B00C63TLCC/) for Pi
-
 ## Code
+
+WebRTC data channels [don't seem to renegotiate](https://stackoverflow.com/questions/61179293/renegotiating-sdp-withaudiovideodata-webrtc) so I use socket.io for driving and WebRTC for audio/video. Clunky but WebRTC documentation is lacking and all the examples suck at illustrating proper SDP renegotiation.
+
+**server/** contains server code. Run with node and proxy through nginx for https.
