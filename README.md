@@ -25,7 +25,7 @@ See .stl files in design/. I recommend printing in PETG. PLA sucks.
 * [2A Qi fast charging receiver USB-C](https://www.aliexpress.com/item/4000239832349.html?spm=a2g0o.productlist.0.0.35b368d0CEJ0jH&algo_pvid=8c201542-8113-476a-9f66-177729616d19&algo_expid=8c201542-8113-476a-9f66-177729616d19-2&btsid=0be3746c15870616127626599eba46&ws_ab_test=searchweb0_0,searchweb201602_,searchweb201603_) if you want wireless charging where the robot can just drive up onto a charger (optional)
 * 1 x DRV8833 carrier [No-name cheap 5 for $8 carrier](https://www.amazon.com/KOOBOOK-DRV8833-Module-Bridge-Controller/dp/B07S4FVY9M/) or [Pololu 1 for $4.95 DRV8833 carrier](https://www.pololu.com/product/2130) or any other DRV8833 carrier
 * [TinyPICO](https://www.adafruit.com/product/4335) or other ESP32 board of your choice
-* [24 AWG hookup wire](https://www.amazon.com/gp/product/B0791B1YPS/)
+* [24 AWG wire](https://www.amazon.com/gp/product/B07G2BWBX8/)
 * [1x2 female Dupont connectors and crimps](https://www.amazon.com/gp/product/B078RRPRQZ/) for motors (or use whatever you prefer)
 * [JST-EH](https://www.digikey.com/catalog/en/partgroup/eh-series/) connectors for ESP32 board and ESP-DRV8833 connection (or use whatever you prefer)
 
