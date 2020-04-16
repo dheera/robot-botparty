@@ -10,9 +10,16 @@
     font-family:sans-serif;
   }
 
+  #buttonConnectContainer {
+    top:15pt;right:60pt;
+    opacity:0.2;
+    z-index:50000;
+    position:fixed;
+  }
+
   #buttonConfigurationContainer {
     top:15pt;right:15pt;
-    opacity:0.5;
+    opacity:0.2;
     z-index:50000;
     position:fixed;
   }

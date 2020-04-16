@@ -5,6 +5,7 @@
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" type="text/css" href="css/material.blue_grey-indigo.min.css">
   <link rel="stylesheet" type="text/css" href="css/index.css">
+  <script type="text/javascript" src="js/BluetoothTerminal.js"></script>
   <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
   <script type="text/javascript" src="js/socket.io.slim.js"></script>
   <script type="text/javascript" src="js/material.min.js"></script>
@@ -14,8 +15,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 </head>
 <body>
+  <div id="buttonConnectContainer">
+    <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+      <i class="material-icons">bluetooth</i>
+    </button>
+  </div>
   <div id="buttonConfigurationContainer">
-    <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+    <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
       <i class="material-icons">tune</i>
     </button>
   </div>

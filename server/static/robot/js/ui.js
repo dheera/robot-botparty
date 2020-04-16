@@ -26,4 +26,8 @@ $(() => {
     $("#panelConfiguration").toggle();
   });
 
+  $("#buttonConnectContainer").click(()=>{
+    connectBluetooth();
+  });
+
 });

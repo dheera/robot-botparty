@@ -142,8 +142,53 @@ function startWebRTC(isOfferer) {
       );
     } else if (message.stick) {
       console.log(message.stick);
+      driveStick(message.stick);
     }
   });
+}
+
+let left_reversed = false;
+let right_reversed = true;
+let deadband = 0.3;
+
+function applyDeadband(input) {
+  if(input > 1.0) return 1.0;
+  if(input < -1.0) return -1.0;
+  let sign = Math.sign(input);
+  let value = Math.abs(input);
+
+  return sign * (deadband + (1.0 - deadband) * value);
+}
+
+function driveStick(stickValues) {
+  let linear = -stickValues[1];
+  let angular = -0.85*stickValues[0];
+  console.log("linear", linear, "angular", angular);
+
+  let motor_left = (linear - angular);
+  let motor_right = (linear + angular);
+
+  motor_left = 255*applyDeadband(motor_left);
+  motor_right = 255*applyDeadband(motor_right);
+
+  if(left_reversed) motor_left = -motor_left;
+  if(right_reversed) motor_right = -motor_right;
+
+  if(motor_left > 255) motor_left = 255;
+  if(motor_left < -255) motor_left = -255;
+  if(motor_right > 255) motor_right = 255;
+  if(motor_right < -255) motor_right = -255;
+
+  command = "G ";
+
+  if(motor_right >= 0) command += Math.round(motor_right) + " 0 ";
+  else command += "0 " + Math.round(-motor_right) + " ";
+
+  if(motor_left >= 0) command += Math.round(motor_left) + " 0 ";
+  else command += "0 " + Math.round(-motor_left) + " ";
+
+  console.log(command);
+  send(command);
 }
 
 function localDescCreated(desc) {
@@ -153,6 +198,38 @@ function localDescCreated(desc) {
     () => sendMessage({'sdp': peerConnection.localDescription}),
     onError
   );
+}
+
+var serviceuuid = "6E400001-B5A3-F393-E0A9-E50E24DCCA9E";
+var CHARACTERISTIC_UUID_RX = "6E400002-B5A3-F393-E0A9-E50E24DCCA9E";
+var CHARACTERISTIC_UUID_TX = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E";
+
+console.log("Service uuid: " + serviceuuid.toLowerCase());
+console.log("CHARACTERISTIC_UUID_RX: " + CHARACTERISTIC_UUID_RX.toLowerCase());
+
+const terminal = new BluetoothTerminal(
+    serviceuuid.toLowerCase(),
+    CHARACTERISTIC_UUID_TX.toLowerCase(),
+    CHARACTERISTIC_UUID_RX.toLowerCase(),
+'\n','\n');
+
+terminal.receive = function(data) {
+  console.log(data);
+};
+
+// Implement own send function to log outcoming data to the terminal.
+const send = (data) => {
+  terminal.send(data).
+      then(() => console.log(data)).
+      catch((error) => console.log(error));
+};
+
+function connectBluetooth() {
+  terminal.disconnect();
+  terminal.connect().
+    then(() => {
+      console.log("connected to " + (terminal.getDeviceName() ? terminal.getDeviceName() : defaultDeviceName));
+    });
 }
 
 $(()=>{

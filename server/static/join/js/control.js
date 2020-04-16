@@ -148,20 +148,20 @@ $(function() {
       initStick();
     }
     if(e.which === 37) {
-      currentKeyboardX -= 0.1;
+      currentKeyboardX -= 0.05;
     } else if(e.which === 39) {
-      currentKeyboardX += 0.1;
+      currentKeyboardX += 0.05;
     } else if(e.which === 38) {
-      currentKeyboardY -= 0.1;
+      currentKeyboardY -= 0.05;
     } else if(e.which === 40) {
-      currentKeyboardY += 0.1;
+      currentKeyboardY += 0.05;
     } else {
       return;
     }
-    if(currentKeyboardX > 0.5) currentKeyboardX = 0.5;
-    if(currentKeyboardX < -0.5) currentKeyboardX = -0.5;
-    if(currentKeyboardY > 0.5) currentKeyboardY = 0.5;
-    if(currentKeyboardY < -0.5) currentKeyboardY = -0.5;
+    if(currentKeyboardX > 1.0) currentKeyboardX = 1.0;
+    if(currentKeyboardX < -1.0) currentKeyboardX = -1.0;
+    if(currentKeyboardY > 1.0) currentKeyboardY = 1.0;
+    if(currentKeyboardY < -1.0) currentKeyboardY = -1.0;
     moveStick(currentKeyboardX, currentKeyboardY);
   });
 
