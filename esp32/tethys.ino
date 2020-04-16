@@ -34,7 +34,7 @@ void ble_send(std::string msg) {
   pTxCharacteristic->notify();
 }
 
-int pinMapping[4] = {4, 14, 15, 27};
+int pinMapping[4] = {22,21,32,33};
 
 unsigned long last_command_time = 0;
 
@@ -105,10 +105,12 @@ class MyCallbacks : public BLECharacteristicCallbacks
 
 void setup() {
 
-    pinMode(4, OUTPUT);
-    pinMode(14, OUTPUT);
-    pinMode(15, OUTPUT);
-    pinMode(27, OUTPUT);
+
+
+    for(int channel=0;channel<4;channel++) {
+      pinMode(pinMapping[channel], INPUT);
+      digitalWrite(pinMapping[channel], LOW);
+    }
     
     EEPROM.begin(EEPROM_SIZE);
 
@@ -165,6 +167,8 @@ void loop() {
         if (deviceConnected) {
             char msg[] = "Z\n";
             ble_send(msg);
+
+            Serial.println(touchRead(4));
         }
     }
 }
