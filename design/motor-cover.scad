@@ -17,6 +17,8 @@ t = 2;
 
     top_space = 4;
     h=12;
+    
+rotate([180,0,0]) {
 
 difference() {
     union() {
@@ -112,6 +114,8 @@ cube_center([1,3.5,1]);
 
 translate([-12/2+1/2,batt_w/2+7+t-3.5/2-9,-1])
 cube_center([1,3.5,1]);
+}
+
 }
 
 module cube_center(dims) {
