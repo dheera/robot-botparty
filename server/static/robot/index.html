@@ -1,20 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <script type="text/javascript" src="https://cdn.scaledrone.com/scaledrone.min.js"></script>
-  <script type="text/javascript" src="socket.io.slim.js"></script>
+  <link rel="stylesheet" type="text/css" href="css//material.min.css">
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" type="text/css" href="css/material.blue_grey-indigo.min.css">
+  <link rel="stylesheet" type="text/css" href="css/index.css">
+  <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="js/socket.io.slim.js"></script>
+  <script type="text/javascript" src="js/material.min.js"></script>
+  <script type="text/javascript" src="js/index.js"></script>
+  <script type="text/javascript" src="js/ui.js"></script>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <link rel="stylesheet" type="text/css" href="index.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 </head>
 <body>
+  <div id="buttonConfigurationContainer">
+    <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+      <i class="material-icons">tune</i>
+    </button>
+  </div>
   <div id="panelConfiguration">
-    Robot id: <input id="panelConfiguration-inputRobotId" type="text" value="0">
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <input class="mdl-textfield__input" type="text" id="inputRobotId" value="-1">
+      <label class="mdl-textfield__label" for="inputRobotId">Robot ID</label>
+    </div>
+
     <br>
-    Pass code: <input id="panelConfiguration-inputPassCode" type="text" value=""">
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <input class="mdl-textfield__input" type="text" id="inputPassCode" value="000000">
+      <label class="mdl-textfield__label" for="inputPassCode">Password</label>
+    </div>
+
     <br>
-    <button id="panelConfiguration-buttonSave">save</button>
+
   </div>
   <div id="panelLocalVideo">
     <video id="localVideo" autoplay muted></video>
@@ -23,6 +43,5 @@
     <video id="remoteVideo" autoplay></video>
   </div>
   <div id="botNumDisplay">-1</div>
-  <script src="index.js"></script>
 </body>
 </html>

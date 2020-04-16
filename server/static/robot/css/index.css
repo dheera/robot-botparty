@@ -1,6 +1,6 @@
 
   body {
-    background:#0080cc;
+    background:#303030;
     margin:0;
     height: 100vh;
     margin: 0;
@@ -9,20 +9,19 @@
     padding:0;
     font-family:sans-serif;
   }
+
+  #buttonConfigurationContainer {
+    top:15pt;right:15pt;
+    opacity:0.5;
+    z-index:50000;
+    position:fixed;
+  }
+
   #remoteVideo {
     position:fixed;
     z-index:100;
     object-fit:cover;
     width:100%;height:100%;top:0;left:0;
-  }
-  #panelLocalVideo {
-    z-index:1000;
-    position:fixed;
-    left:5vh;
-    top:5vh;
-    width:40vh;
-    height:30vh;
-    box-shadow: 5px 5px 5px rgba(0,0,0,0.3);
   }
   #localVideo {
     object-fit:cover;
@@ -30,8 +29,21 @@
     opacity:1.0;
   }
 
+  #panelLocalVideo {
+        z-index:25;
+        background:#404040;
+        width:100%;
+        height:100%;
+        top:0;
+        left:0;
+        position:fixed;
+        opacity:0.3;
+  }
+
   #panelConfiguration {
+    background:#404040;
     z-index:10000;
+    padding:20pt;
     color:#ffffff;
     display:none;
     background:#303030;
@@ -40,11 +52,13 @@
 
   #botNumDisplay {
       position:fixed;
-      top: 10vh;
-      right:10vh;
+      top: 15pt;
+      left:15pt;
+      padding:0;
+      margin:0;
       z-index:1000;
       font-family:sans-serif;
-      font-size:20vh;
+      font-size:40pt;
       line-height:1em;
       vertical-align:middle;
       font-weight:bold;

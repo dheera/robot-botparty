@@ -2,6 +2,11 @@
 if (!location.hash) {
   location.hash = makeid(6);
 }
+
+window.onhashchange = function() {
+    window.location.reload();
+}
+
 let roomName = location.hash.substring(1);
 
 function makeid(length) {
@@ -15,35 +20,22 @@ function makeid(length) {
 }
 let hash = function(b){for(var a=0,c=b.length;c--;)a+=b.charCodeAt(c),a+=a<<10,a^=a>>6;a+=a<<3;a^=a>>11;return((a+(a<<15)&4294967295)>>>0).toString(16)};
 
-let robotId = window.localStorage.getItem("robotId") || -1;
-let passCode = window.localStorage.getItem("passCode") || "";
+let robotId;
+let passCode;
 
-$(() => {
-  if(!window.localStorage.getItem("robotId")) {
-    $("#panelConfiguration").show();
-    $("#panelConfiguration-inputPassCode").val(makeid(6));
-  } else {
-    robotId = window.localStorage.getItem("robotId");
-    passCode = window.localStorage.getItem("passCode");
-    $("#panelConfiguration-inputRobotId").val(robotId);
-    $("#panelConfiguration-inputPassCode").val(passCode);
-  }
-});
+function readSettings() {
+  robotId = window.localStorage.getItem("robotId") || -1;
+  passCode = window.localStorage.getItem("passCode") || "";
+  droneRoomName =  hash(roomName + "-" + passCode);
+}
 
-$("#panelConfiguration-buttonSave").click(()=>{
-  window.localStorage.setItem("robotId", $("#panelConfiguration-inputRobotId").val());
-  window.localStorage.setItem("passCode", $("#panelConfiguration-inputPassCode").val());
-  $("#panelConfiguration").hide();
-});
-
-let socket = io("https://botparty.dheera.net/");
-
-const droneRoomName = hash(roomName + "-" + passCode);
+let droneRoomName;
 const configuration = {
   iceServers: [{
     urls: 'stun:stun.l.google.com:19302'
   }]
 };
+let socket;
 let room;
 let peerConnection;
 let isOfferer = false;
@@ -53,17 +45,21 @@ function onError(error) {
   console.error(error);
 };
 
-socket.on('connect', ()=>{
-  socket.on(droneRoomName + '.members', members => {
-    console.log('MEMBERS', members);
-    // If we are the second user to connect to the room we will be creating the offer
-    isOfferer = members.length === 2;
-    // const isOfferer = false;
-    startWebRTC(isOfferer);
-    });
+function connectSocket() {
+  if(socket) socket.disconnect();
+  socket = io("https://botparty.dheera.net/");
+  socket.on('connect', ()=>{
+    socket.on(droneRoomName + '.members', members => {
+      console.log('MEMBERS', members);
+      // If we are the second user to connect to the room we will be creating the offer
+      isOfferer = members.length === 2;
+      // const isOfferer = false;
+      startWebRTC(isOfferer);
+      });
 
-    socket.emit("subscribe", droneRoomName);
-});
+      socket.emit("subscribe", droneRoomName);
+  });
+}
 
 // Send signaling data via Scaledrone
 function sendMessage(message) {
@@ -158,3 +154,8 @@ function localDescCreated(desc) {
     onError
   );
 }
+
+$(()=>{
+  readSettings();
+  connectSocket();
+})
