@@ -4,6 +4,20 @@ A mini telepresence robot. At about $130 total for all parts (including the pict
 
 ![robot](/images/robot.jpg?raw=true "robot")
 
+Completed robot.
+
+![robot](/images/charging-wireless.jpg?raw=true "robot")
+
+If you buy a 5V2A Qi charging sticker, you can charge the robot wirelessly just by driving on top of a wireless charger. Simple and no docking alignment fuss!
+
+![robot](/images/charging-usb.jpg?raw=true "robot")
+
+You can use Anker Powerline micro-USB cables to charge the robot without taking it apart. *Not all micro-USB cables* will clear the outer edge of the sprocket.
+
+![robot](/images/tinypico-drv8833-combo.jpg?raw=true "robot")
+
+The motors are driven by a DRV8833 and a TinyPICO ESP32 microcontroller. The phone talks to the ESP32 over BLE. The ESP32 is super feature packed and also has Wi-Fi, capacitive touch sensing, I2C, SPI, UART, ADC, DAC, and lots of other features so you can build off this design and add whatever sensors and actuators you please. Build a security robot, a robot that roams around sensing VOC gas levels, and more!
+
 ## Assembly
 
 ### 3D printed parts
