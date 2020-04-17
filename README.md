@@ -47,7 +47,14 @@ See .stl files in design/. I recommend printing in PETG. PLA sucks.
 
 ## Code
 
-WebRTC data channels [don't seem to renegotiate](https://stackoverflow.com/questions/61179293/renegotiating-sdp-withaudiovideodata-webrtc) so I use socket.io for driving and WebRTC for audio/video. Clunky but WebRTC documentation is lacking and all the examples suck at illustrating proper SDP renegotiation.
+**esp32/** contains firmware for a TinyPICO. (a) Follow TinyPICO's instructions to enable the Arduino IDE (b) install the analogWrite library for ESP32 and then (c) compile it with Arduino. You can then visit the [ESP32 web terminal](https://dheera.github.io/esp32terminal/) to test connectivity. Steps to test:
+
+- Use desktop Chrome on a laptop that has Bluetooth, or Chrome on Android also works. Chrome on iOS will not work.
+- Go to chrome://flags/#enable-experimental-web-platform-features and enable.
+- Go to the ESP32 web terminal and Connect to "tethys-255" which should be your newly flashed TinyPICO.
+- If you connected successfully, you will see "Z" being output every second. That is a heartbeat from the firmware.
+- Type "G 0 255 0 255" to drive the motors, and you can try other values as well. They are just PWM values for 2 H-bridges.
+- Type "S 4" to set the robot number to 4 or whatever number you want <=255. This is a persistent setting. After a power cycle (unplug and replug the TinyPICO) the device will show up as "tethys-4". This allows you to prevent from connecting the wrong robot phone to the wrong robot ESP32.
 
 **server/** contains server code. Run with node and proxy node through nginx for https (see nginx.conf and sites-available/default). Hacky, to be improved.
 
@@ -56,4 +63,6 @@ You MUST go to chrome://flags/#enable-experimental-web-platform-features on the 
 https://yourserver/robot/#room on the robot with Chrome. You need to set a robot id and a passcode. Then every time you load the page on the robot you need to press the bluetooth button and select the "tethys-###" device. Unfortunately this is a limitation of the web bluetooth API and it cannot auto-connect without a user gesture.
 
 https://yourserver/join/#room is for participants. Chrome on Linux/MacOS/Windows should all work. Issues have been reported on Safari and iOS and I need to get a hold of some Apple hardware to debug these.
+
+WebRTC data channels [don't seem to renegotiate](https://stackoverflow.com/questions/61179293/renegotiating-sdp-withaudiovideodata-webrtc) so I use socket.io for driving and WebRTC for audio/video. Clunky but WebRTC documentation is lacking and all the examples suck at illustrating proper SDP renegotiation.
 
