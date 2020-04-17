@@ -53,7 +53,7 @@ See .stl files in design/. I recommend printing in PETG. PLA sucks.
 - Go to chrome://flags/#enable-experimental-web-platform-features and enable.
 - Go to the ESP32 web terminal and Connect to "tethys-255" which should be your newly flashed TinyPICO.
 - If you connected successfully, you will see "Z" being output every second. That is a heartbeat from the firmware.
-- Type "G 0 255 0 255" to drive the motors, and you can try other values as well. They are just PWM values for 2 H-bridges.
+- Type "G 0 255 0 255" to drive the motors, and you can try other values as well. They are just PWM values for 2 H-bridges. The motors will stop after 1 second; this is expected as the ESP32 firmware imposes a 1 second heartbeat on incoming commands.
 - Type "S 4" to set the robot number to 4 or whatever number you want <=255. This is a persistent setting. After a power cycle (unplug and replug the TinyPICO) the device will show up as "tethys-4". This allows you to prevent from connecting the wrong robot phone to the wrong robot ESP32.
 
 **server/** contains server code. Run with node and proxy node through nginx for https (see nginx.conf and sites-available/default). Hacky, to be improved.
