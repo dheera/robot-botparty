@@ -49,4 +49,11 @@ See .stl files in design/. I recommend printing in PETG. PLA sucks.
 
 WebRTC data channels [don't seem to renegotiate](https://stackoverflow.com/questions/61179293/renegotiating-sdp-withaudiovideodata-webrtc) so I use socket.io for driving and WebRTC for audio/video. Clunky but WebRTC documentation is lacking and all the examples suck at illustrating proper SDP renegotiation.
 
-**server/** contains server code. Run with node and proxy through nginx for https.
+**server/** contains server code. Run with node and proxy node through nginx for https (see nginx.conf and sites-available/default). Hacky, to be improved.
+
+You MUST go to chrome://flags/#enable-experimental-web-platform-features on the robot and enable it! This is required for Chrome to be able to talk to BLE devices from a webpage. Only the robot needs this, not your participants.
+
+https://yourserver/robot/#room on the robot with Chrome. You need to set a robot id and a passcode. Then every time you load the page on the robot you need to press the bluetooth button and select the "tethys-###" device. Unfortunately this is a limitation of the web bluetooth API and it cannot auto-connect without a user gesture.
+
+https://yourserver/join/#room is for participants. Chrome on Linux/MacOS/Windows should all work. Issues have been reported on Safari and iOS and I need to get a hold of some Apple hardware to debug these.
+
