@@ -42,8 +42,8 @@ See .stl files in design/. I recommend printing in PETG. PLA sucks.
 * 1 x DRV8833 carrier [No-name cheap 5 for $8 carrier](https://www.amazon.com/KOOBOOK-DRV8833-Module-Bridge-Controller/dp/B07S4FVY9M/) or [Pololu 1 for $4.95 DRV8833 carrier](https://www.pololu.com/product/2130) or any other DRV8833 carrier
 * [TinyPICO](https://www.adafruit.com/product/4335) or other ESP32 board of your choice
 * [24 AWG wire](https://www.amazon.com/gp/product/B07G2BWBX8/)
-* [1x2 female Dupont connectors and crimps](https://www.amazon.com/gp/product/B078RRPRQZ/) for motors (or use whatever you prefer)
-* [JST-EH](https://www.digikey.com/catalog/en/partgroup/eh-series/) connectors for ESP32 board and ESP-DRV8833 connection (or use whatever you prefer)
+* [1x2 Dupont connector housing](https://www.pololu.com/product/1901) and [crimps](https://www.pololu.com/product/1930) or just get a [kit like this](https://www.amazon.com/gp/product/B078RRPRQZ/). [This crimper](https://www.amazon.com/Crimping-0-08-1-0-18-28AWG-Ratcheting-Connector/dp/B01N1RFZZ4/) has worked well for me for Dupont crimps.
+* [JST-EH](https://www.digikey.com/catalog/en/partgroup/eh-series/) connectors for ESP32 board and ESP-DRV8833 connection (or use whatever you prefer). [This crimper](https://www.amazon.com/Engineers-Precision-Crimping-Pliers-Pa-09/dp/B002AVVO7K/) has worked well for me for JST-EH.
 
 ## Code
 
