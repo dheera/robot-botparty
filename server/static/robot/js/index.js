@@ -96,7 +96,7 @@ function startWebRTC(isOfferer) {
     if (!remoteVideo.srcObject || remoteVideo.srcObject.id !== stream.id) {
       remoteVideo.srcObject = stream;
     }
-    $("#panelLocalVideo").fadeOut();
+    $("#panelLocalVideo").hide();
   };
 
   peerConnection.onconnectionstatechange = event => {
