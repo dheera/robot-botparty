@@ -13,7 +13,7 @@ difference() {
     for(s=[-1:2:1]) {
     translate([s*20,0,0])
     rotate([9.0,0,0])
-    cube_center([10,8,50]);
+    cube_center([10,8,40]);
     }
     
     scale([1,1,-1])
@@ -25,7 +25,9 @@ difference() {
     union() {
         cube_center([102,10,6]);
         translate([0,-60/2,0])
-        cube_center([10,60,6]);
+        cube_center([4,55,6]);
+        translate([0,-55,0])
+        cylinder(d=9,h=6,$fn=64);
     }
     for(i=[-40:40:40]) {
         translate([i,0,0])
