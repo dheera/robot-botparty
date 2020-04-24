@@ -162,7 +162,7 @@ function applyDeadband(input) {
 
 function driveStick(stickValues) {
   let linear = -stickValues[1];
-  let angular = -0.85*stickValues[0];
+  let angular = -0.7*stickValues[0];
   console.log("linear", linear, "angular", angular);
 
   let motor_left = (linear - angular);

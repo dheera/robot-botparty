@@ -28,7 +28,6 @@
       position:fixed;
       z-index:10000;
       color:#ffffff;
-      background:#303030;
       position:fixed;
       left:0;
       top:0;
@@ -68,7 +67,7 @@
   }
 
 #localVideoContainer {
-      z-index:10001;
+      z-index:5001;
       background:#404040;
       width:100%;
       height:100%;
@@ -115,6 +114,17 @@
     opacity:1.0;
   }
 
+  .localVideoContainerLoggedIn {
+    z-index:5001;
+    opacity:0.5 !important;
+    position:fixed;
+    top:10pt !important;
+    left:10pt !important;
+    width:24vh !important;;
+    height:18vh !important;
+    border:2pt solid black !important;
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.3) !important;
+  }
 
   #botNumDisplay {
       position:fixed;

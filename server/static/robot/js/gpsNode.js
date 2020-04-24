@@ -48,9 +48,9 @@
       };
       pub_gps_fix.publish(msg);
     }, {
-      timeout: 1000,
+      timeout: 5000,
       enableHighAccuracy: true
     });
-  }, 1000);
+  }, 5000);
 
 })();
