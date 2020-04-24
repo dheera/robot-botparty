@@ -39,6 +39,7 @@ $(() => {
         $("#inputPassCode").val(),
         () => {
           $("#panelJoin").hide();
+          $("#localVideoContainer").addClass("localVideoContainerLoggedIn");
         }, ()=> {
           console.log("authentication failure");
           $("#errorMessage").text("Bad passcode").slideDown().delay(2000).slideUp();
@@ -54,6 +55,7 @@ $(() => {
       $("#inputPassCode").val(),
       () => {
         $("#panelJoin").hide();
+        $("#localVideoContainer").addClass("localVideoContainerLoggedIn");
       }, ()=> {
         console.log("authentication failure");
         $("#errorMessage").text("Bad passcode").slideDown().delay(2000).slideUp();
