@@ -1,4 +1,4 @@
-# robot-tethys
+# BotParty
 
 A mini telepresence robot. At about $130 total for all parts (including the pictured used Pixel 1 phone), the goal of this robot is to be as inexpensive as possible for a complete telepresence solution.
 
